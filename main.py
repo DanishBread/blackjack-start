@@ -122,7 +122,7 @@ def play_game():
 
 #Hint 14: Ask the user if they want to restart the game. If they answer yes, clear the console and start a new game of blackjack and show the logo from art.py.
 
-while input("Hit 'y if you wanna play Blackjack! '").lower()== "y":
+while input("Hit 'y' if you wanna play Blackjack! ").lower()== "y":
   clear()
   print(logo)
   play_game()
