@@ -35,6 +35,8 @@
 #11 is the Ace.
 #cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 import random
+from replit import clear 
+from art import logo
 def deal_card():
   """Returns a random card from the deck"""
   cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
@@ -77,46 +79,50 @@ def compare(user_score, comp_score):
   else:
     return "You Lose!!!"
 
+def play_game():
+  #Hint 5: Deal the user and computer 2 cards each using deal_card() and append().
 
-#Hint 5: Deal the user and computer 2 cards each using deal_card() and append().
+  user_cards=[]
+  computer_cards=[]
+  is_game_over=False
 
-user_cards=[]
-computer_cards=[]
-is_game_over=False
+  for _ in range(2):
+    user_cards.append(deal_card()) 
+    computer_cards.append(deal_card())
 
-for _ in range(2):
-  user_cards.append(deal_card()) 
-  computer_cards.append(deal_card())
+  #Hint 11: The score will need to be rechecked with every new card drawn and the checks in Hint 9 need to be repeated until the game ends.
+  while not is_game_over:
+      
 
-#Hint 11: The score will need to be rechecked with every new card drawn and the checks in Hint 9 need to be repeated until the game ends.
-while not is_game_over:
-    
+    #Hint 9: Call calculate_score(). If the computer or the user has a blackjack (0) or if the user's score is over 21, then the game ends.
 
-  #Hint 9: Call calculate_score(). If the computer or the user has a blackjack (0) or if the user's score is over 21, then the game ends.
+    user_score= calculate_score(user_cards)
+    computer_score= calculate_score(computer_cards)
+    print(f"user's cards are: {user_cards}")
+    print(f"And User's current scores are: {user_score}")
+    print(f"Computer's cards are: {computer_cards[0]}")
 
-  user_score= calculate_score(user_cards)
-  computer_score= calculate_score(computer_cards)
-  print(f"user's cards are: {user_cards}")
-  print(f"And User's current scores are: {user_score}")
-  print(f"Computer's cards are: {computer_cards[0]}")
-
-  if user_score== 0 or  computer_score==0 or user_score>21:
-    is_game_over=True
-    #Hint 10: If the game has not ended, ask the user if they want to draw another card. If yes, then use the deal_card() function to add another card to the user_cards List. If no, then the game has ended.
-  else:
-    if input("Hit 'y' to get another card or any other key to pass: ").lower() =='y':
-      user_cards.append(deal_card())
-    else:
+    if user_score== 0 or  computer_score==0 or user_score>21:
       is_game_over=True
-#Hint 12: Once the user is done, it's time to let the computer play. The computer should keep drawing cards as long as it has a score less than 17.
-while computer_score!= 0 and computer_score<17:
-  computer_cards.append(deal_card())
-  computer_score= calculate_score(computer_cards)
+      #Hint 10: If the game has not ended, ask the user if they want to draw another card. If yes, then use the deal_card() function to add another card to the user_cards List. If no, then the game has ended.
+    else:
+      if input("Hit 'y' to get another card or any other key to pass: ").lower() =='y':
+        user_cards.append(deal_card())
+      else:
+        is_game_over=True
+  #Hint 12: Once the user is done, it's time to let the computer play. The computer should keep drawing cards as long as it has a score less than 17.
+  while computer_score!= 0 and computer_score<17:
+    computer_cards.append(deal_card())
+    computer_score= calculate_score(computer_cards)
 
-print(f"Your Final hand is {user_cards}, with final score {user_score}\n Opponent's final hand is {computer_cards}, with final score {computer_score}")
+  print(f"Your Final hand is {user_cards}, with final score {user_score}\n Opponent's final hand is {computer_cards}, with final score {computer_score}")
 
-print(compare(user_score, computer_score))
+  print(compare(user_score, computer_score))
 
 
 #Hint 14: Ask the user if they want to restart the game. If they answer yes, clear the console and start a new game of blackjack and show the logo from art.py.
 
+while input("Hit 'y if you wanna play Blackjack! '").lower()== "y":
+  clear()
+  print(logo)
+  play_game()
